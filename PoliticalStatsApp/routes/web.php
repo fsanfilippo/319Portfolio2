@@ -10,9 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token, x_csrftoken');
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/users', 'UserController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
