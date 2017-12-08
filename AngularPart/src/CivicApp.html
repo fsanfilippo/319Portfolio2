@@ -1,0 +1,81 @@
+<!--  Demo of Phong reflection model using Phong shading
+(color is calculated per-fragment).
+Same as Lighting2a.html but adds the specular term in the fragment
+shader. Also uses Lighting2.js code.
+
+This code is dependent on three.js as well as on the teal book utilities,
+see below.
+-->		
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Civic App</title>
+<style>
+			#map{
+				width: 100%;
+				height: 98vh;
+				background-color: #555555;
+			}
+		</style>
+</head>
+
+<body> 
+	<h1>Civic Information</h1>
+		<form>
+			Country: <input id="country" type="text" title="Example: United States"></input><br><br>
+			State: <input id="state" type="text" title="Example: Iowa"></input><br><br>
+			County: <input id="county" type="text" title="Example: Story"></input><br><br>
+			City: <input id="city" type="text" title="Example: Ames"></input><br><br>
+			Street Address: <input id="addr" type="text" title="Example: 123 Main St."></input><br><br>
+			Zip Code: <input id="zip" type="text" title="Example: 55555"></input><br><br>
+		
+		
+			
+			<input type="button" id="button" value="submit" onclick="load()"></input>
+			
+		</form>
+		<div id="results"></div>
+		<script>
+			   function lookup(address, callback) {
+				var electionId = 2000;
+		 
+				var req = gapi.client.request({
+					'path' : '/civicinfo/v2/voterinfo',
+					'params' : {'electionId' : electionId, 'address' : address}
+				});
+			   req.execute(callback);
+			  }
+			  function renderResults(response, rawResponse) {
+				var el = document.getElementById('results');
+				if (!response || response.error) {
+				  el.appendChild(document.createTextNode(
+					  'Error while trying to fetch polling place'));
+				  return;
+				}
+				console.log(response);
+				el.append(response.contests['0'].candidates['2'].name);
+				//el.append(response.toString());
+				
+				
+			  }
+			  function load() {
+			  
+				var country = document.getElementById('country').value;
+				var state = document.getElementById('state').value;
+				var county = document.getElementById('county').value;
+				var city = document.getElementById('city').value;
+				var address = document.getElementById('addr').value;
+				var zip = document.getElementById('zip').value;
+			  
+			  
+			  
+				gapi.client.setApiKey('AIzaSyCgRdzkXIswZHdeuvYEHSc7T2G0vNGG2zA');
+				//lookup('759 State Hwy 15 Fairmont MN USA 56031', renderResults);
+				lookup(address+" "+city+" "+county+" "+state+" "+country+" "+zip, renderResults);
+			  }
+		</script>
+		<script src='https://apis.google.com/js/client.js'></script>
+</body>
+</html>
