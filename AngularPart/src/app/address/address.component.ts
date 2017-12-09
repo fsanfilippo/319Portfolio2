@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AddressService} from '../address.service';
+
 
 @Component({
   selector: 'app-address',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./address.component.css']
 })
 export class AddressComponent implements OnInit {
+  value : Object;
+  gapi : Object;
+  
+  constructor(private addressService: AddressService) { 
 
-  constructor() { }
+
+  }
 
   ngOnInit() {
+    console.log(this.addressService.getgapi().subscribe(data => console.log(data)));
   }
+
+  getgapi(){
+    
+  }
+
 
 }
