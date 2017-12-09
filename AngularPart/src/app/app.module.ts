@@ -5,8 +5,8 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 
 import { HerosComponent } from './heros/heros.component';
-import { HeroService } from './hero.service';
 import { AddressComponent } from './address/address.component';
+import { HeroService } from './hero.service';
 
 
 @NgModule({

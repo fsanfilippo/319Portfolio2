@@ -1,0 +1,21 @@
+div.addressDiv{
+    background-color: #7777ee;
+    border: solid 5px #000000;
+    width: 95%;
+    margin: 0 auto;
+    top: 20px;
+    height: 110px;
+}
+
+div.addressDiv2{
+    position: absolute;
+    width: 40%;
+    left: 30%;
+    padding: 30px;
+}
+
+
+
+label, input{
+    font-size: 36px;
+}
