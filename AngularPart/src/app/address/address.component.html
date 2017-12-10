@@ -1,31 +1,71 @@
-<div class="addressDiv">
-  <div class="addressDiv2">
-    <label>Address:
-      <input id='address'  type="text" [(ngModel)]="address">
-      <input type="button" value="Save" (click)="onClick()">
-
-    </label>
+<div class="container">
+  <div class="container addressDiv">
+    <label for="address">Address</label>
+    <div class="addressDiv2 input-group">
+      <input name="address" class="form-control" id='address'  type="text" [(ngModel)]="address">
+      <span class="input-group-btn">
+        <input class="btn btn-default" type="button" value="Save" (click)="getCorrectAddress()">
+      </span>
+      
+    </div>
+    <div *ngIf="confirmAddress">
+      <br>
+      <h4>Does this look correct?</h4>
+      <h3>{{normalizedAddress}}</h3>
+      <button (click)="address = normalizedAddress; confirmAddress = false" class="btn btn-success">Confirm</button>
+    </div>
+    <div *ngIf="setAddress">
+        <h3>Please Set Address</h3>
+        <button (click)="setAddress = false" class="btn btn-default">Dismiss</button>
+    </div>
   </div>
-</div>
 
-<div class="election-list">
-  <h2>List of Elections:</h2>
-  <ul class="elections">
-    <li *ngFor="let election of elections" (click)="onSelect(election)">
-      <span class="badge">{{election.id}}</span> {{election.name}}
-    </li>
-  </ul>
-</div>
-
-<div *ngIf="selectedElection" class="election-description">
-    
-  <h2>{{ selectedElection.name | uppercase }} INFO</h2>
-  <div>
-    <ul class="info">
-      <li *ngFor="let loc of pollingLocations">
-        {{loc}}
+  <div class="election-list">
+    <h2>List of Elections:</h2>
+    <ul class="elections list-group">
+      <li class="list-group-item" *ngFor="let election of elections" (click)="onSelect(election)">
+        <span class="badge">Election ID: {{election.id}}</span> {{election.name}}
       </li>
     </ul>
   </div>
 
+  <div *ngIf="selectedElection" class="election-description">
+      
+    <h2>{{ selectedElection.name | uppercase }} INFO</h2>
+    <div>
+      Election Day: <b>{{voterInfo.election.electionDay}}</b>
+      <ul class="info list-group">
+        <li class="list-group-item" *ngFor="let loc of voterInfo.pollingLocations">
+          Polling Location Address: <b>{{loc.address.locationName + ' ' + loc.address.line1 + ' ' + loc.address.city + ', ' + loc.address.state}} </b>
+        </li>
+      </ul>
+      Contests: 
+      <ul class="info list-group">
+        <li class="list-group-item" *ngFor="let contest of voterInfo.contests">
+          <p><b>Type: {{contest.type}}</b></p>
+          <p><b>Office: {{contest.office}}</b></p>
+          <p><b>District: {{contest.district.name}}</b></p>
+          <b>Level: </b>
+          <ul >
+              <li *ngFor="let elem of contest.level">
+                {{elem}}
+              </li>
+            </ul>
+          <br>
+          <b>Canidates:</b>
+          <ul class="info list-group">
+            <li class="list-group-item" *ngFor="let candidate of contest.candidates">
+              <p>name: {{candidate.name}}</p>
+              <p>Party: {{candidate.party}}</p>
+              <p *ngIf="candidate.candidateUrl">URL: <a href={{candidate.candidateUrl}}>{{candidate.candidateUrl}}</a></p>
+            </li>
+          </ul>
+
+
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
 </div>
