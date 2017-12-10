@@ -60,33 +60,27 @@ see below.
 				console.log(response);
 			  }
 			  function renderResults(response, rawResponse) {
-				var el = document.getElementById('results');
 				if (!response || response.error) {
 				  el.appendChild(document.createTextNode(
 					  'Error while trying to fetch polling place'));
 				  return;
 				}
 				console.log(response);
-				el.append(response.contests['0'].candidates['2'].name);
 				//el.append(response.toString());
 				
 				
 			  }
 			  function load() {
 			  
-				var country = document.getElementById('country').value;
-				var state = document.getElementById('state').value;
-				var county = document.getElementById('county').value;
-				var city = document.getElementById('city').value;
-				var address = document.getElementById('addr').value;
-				var zip = document.getElementById('zip').value;
+				var address = document.getElementById('country').value;
+				
 			  
 			  
 			  
 				gapi.client.setApiKey('AIzaSyCgRdzkXIswZHdeuvYEHSc7T2G0vNGG2zA');
 				//lookup('759 State Hwy 15 Fairmont MN USA 56031', renderResults);
 				lookupIDs(address+" "+city+" "+county+" "+state+" "+country+" "+zip,renderIDs);
-				lookupInfo(address+" "+city+" "+county+" "+state+" "+country+" "+zip, renderResults);
+				lookupInfo('759 State Hwy 15 Fairmont MN USA 56031', renderResults);
 			  }
 		</script>
 		<script src='https://apis.google.com/js/client.js'></script>

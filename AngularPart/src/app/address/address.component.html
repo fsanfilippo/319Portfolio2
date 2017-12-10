@@ -1,8 +1,31 @@
 <div class="addressDiv">
   <div class="addressDiv2">
     <label>Address:
-      <input type="text">
+      <input id='address'  type="text" [(ngModel)]="address">
+      <input type="button" value="Save" (click)="onClick()">
 
     </label>
   </div>
+</div>
+
+<div class="election-list">
+  <h2>List of Elections:</h2>
+  <ul class="elections">
+    <li *ngFor="let election of elections" (click)="onSelect(election)">
+      <span class="badge">{{election.id}}</span> {{election.name}}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="selectedElection" class="election-description">
+    
+  <h2>{{ selectedElection.name | uppercase }} INFO</h2>
+  <div>
+    <ul class="info">
+      <li *ngFor="let loc of pollingLocations">
+        {{loc}}
+      </li>
+    </ul>
+  </div>
+
 </div>

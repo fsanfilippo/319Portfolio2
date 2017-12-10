@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { HerosComponent } from './heros/heros.component';
 import { AddressComponent } from './address/address.component';
-import { HeroService } from './hero.service';
+import { AddressService } from './address.service';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { HeroService } from './hero.service';
     FormsModule,
     HttpModule
   ],
-  providers: [HeroService],
+  providers: [AddressService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
