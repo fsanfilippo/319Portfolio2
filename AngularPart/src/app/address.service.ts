@@ -4,6 +4,7 @@ import {of} from 'rxjs/Observable/of';
 import {Http} from '@angular/http';
 import { environment } from '../environments/environment';
 import {ElectionResponse} from './electionResponse';
+import 'rxjs/add/operator/map';
 
 const GAPI_URL = environment.gapiUrl;
 
